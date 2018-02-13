@@ -1,0 +1,14 @@
+.page-style {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.user-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-container {
+ width: 50%; 
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel='stylesheet' href='fullcalendar.css' />
+  <link rel='stylesheet' href='main.css' />  
+  <script src='lib/jquery.min.js'></script>
+  <script src='lib/moment.min.js'></script>
+  <script src='fullcalendar.js'></script>
+  
+  <script> 
+  $(document).ready(function() {
+      // page is now ready, initialize the calendar...
+      $('#calendar').fullCalendar({
+        events: options.makeEvents,
+        dayClick: function() {
+            alert('a day has been clicked!');
+          }
+        
+        })
+      });
+  </script>
+
+  <title>Interactive Calendar</title>
+</head>
+<body>
+  <div class="page-style">
+    <div class="user-options">
+      <div class="constraints">
+        <h2>Set Your Schedule</h2>
+        <form action="">
+          <p>
+            <h4>Days Availble To Work</h4>
+            <label for="sunday"></label>
+            <input type="checkbox"  name="Sunday">Sunday
+            <input type="checkbox"  name="Monday">Monday
+            <input type="checkbox"  name="Tuesday">Tuesday
+            <input type="checkbox"  name="Wednesday">Wenesday
+            <input type="checkbox"  name="Thursday">Thursday
+            <input type="checkbox"  name="Friday">Friday
+            <input type="checkbox"  name="Saturday">Saturday
+          </p>                      
+          <p>
+            <h4>Daily Hours</h4>
+            <label for="startTime">Working Day Start Time: </label>
+            <input type="time" id="startTime"> 
+            <br>
+            <label for="endTime">Working Day End Time: </label>
+            <input type="time" id="endTime">  
+          </p>
+          <p>
+            <h4>Appointment Length</h4>
+          </p>
+          <p>
+            <h4></h4>
+          </p>
+          <button id="my-next-button">Populate Calendar</button>
+        </form>
+        <script>
+            const options = {
+              makeEvents: null
+            }
+            var form = document.querySelector("form");
+            form.addEventListener("submit", event => {
+              console.log("Creating Appointments");
+              options.makeEvents = [{
+                title: 'Appointment',
+                start: '2018-02-13T13:00:00',
+                end: '2018-02-13T14:00:00'
+              },
+              {
+                title: 'Appointment',
+                start: '2018-02-14T13:00:00',
+                end: '2018-02-14T14:00:00'
+              }]
+              debugger
+              $('#calendar').fullCalendar('render');
+              event.preventDefault();
+              return $('#calendar').fullCalendar( 'rerenderEvents' )
+            });
+            </script>
+      </div>
+      <div className="taken-times">
+        <h2>Taken Time Slots</h2>
+      </div>      
+    </div>
+    <div class="calendar-container">
+      <div id='calendar'></div>
+    </div>
+  </div>
+</body>
+</html>
+
+<!-- 
+var Sunday = form.elements.Sunday.value;              
+var start = form.elements.startTime.value;
+var end = form.elements.endTime.value;
+value="Sunday"
+value="Monday"
+value="Tuesday"
+value="Wednesday"
+value="Thursday"
+value="Friday"
+value="Saturday" -->
