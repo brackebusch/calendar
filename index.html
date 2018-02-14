@@ -69,26 +69,37 @@
                 <td><label for="appLength">Appointment Length</label></td>
                 <td><input id="appLength" type="number"></td>
                 <td>
-                <select>
-                  <option>Min</option>
-                  <option>Hr</option>
+                <select id="appLengthFormat">
+                  <option value="minutes" selected="selected">Min</option>
+                  <option value="hours">Hr</option>
                 </select>
               </td>
               </tr>
               <tr>
-                  <td><label for="appLength">Time Between Appointments</label></td>
-                  <td><input id="appLength" type="number"></td>
+                  <td><label for="buggerLength">Time Buffer Between Appointments</label></td>
+                  <td><input id="bufferLength" type="number"></td>
                   <td>
-                    <select>
-                      <option>Min</option>
-                      <option>Hr</option>
+                    <select id="bufferLengthFormat">
+                      <option value="minutes" selected="selected">Min</option>
+                      <option value="hours">Hr</option>
                     </select>
                   </td>
+              </tr>
+              <tr>
+                <td>Earliest Available Appointment</td>
+                <td><input id="notice" type="number"></td>
+                <td>
+                  <select id="noticeFormat">
+                    <option value="m">minutes</option>                    
+                    <option value="h" selected="selected">hour</option>
+                    <option value="d">day</option>
+                    <option value="w">week</option>                    
+                  </select>
+                </td>
               </tr>
             </table>
           
             <button>Populate Calendar</button>
-          <!-- <input type="button" name="submit" value="Populate Calendar" onclick=""> -->
         </form>
 
 
@@ -99,20 +110,38 @@
 
               console.log(form.elements);
               console.log(form.elements[7].value)
+              
+              let buffer = form.elements.notice.value
+              let noticeFormat = form.elements.noticeFormat.value
+              let appLength = parseInt(form.elements.appLength.value) + parseInt(form.elements.bufferLength.value)
+              timeStyle = form.elements.appLengthFormat.value
 
-              let startTime = form.elements[7].value
-              moment().endOf('day').add()
+              console.log(buffer);             
+              console.log(noticeFormat);
+              console.log(appLength)
+
+              let m = moment().endOf('day').add(buffer, noticeFormat)
+              let startTime = m.minute() || m.second() || m.millisecond() ? m.add(1, 'hour').startOf('hour') : m.startOf('hour');
+              console.log(startTime)
+              debugger
 
               $('#calendar').fullCalendar({
                 forceEventDuration: true,
                 events: [{
-                 title: "Appointment",
-                 start: moment(`${startTime}`, "HH-MM")
-                }],
+                      title: "Appt",
+                      start: startTime
+                      },
+                      {
+                      title: "Appt",
+                      start: startTime.add(appLength, timeStyle)
+                      },
+                      {
+                      title: "Appt",
+                      start: startTime.add(appLength, timeStyle).add(appLength, timeStyle)
+                      }],
                 eventLimit: true,
                 eventClick: function(calEvent, jsEvent, view) { 
-                  alert('an event has been clicked!');
-                  $(this).css('border-color', 'red');
+                  $(this).css('backgroundColor', 'gray');
                 }                
               })
             });
@@ -148,8 +177,8 @@ value="Thursday"
 value="Friday"
 value="Saturday" -->
 
-<!-- 
-options.makeEvents = [{
+
+<!-- options.makeEvents = [{
   title: 'Available',
   start: '2018-02-13T13:00:00',
 },
