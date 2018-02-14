@@ -10,81 +10,101 @@
   <script src='lib/moment.min.js'></script>
   <script src='fullcalendar.js'></script>
   
-  <script> 
-  $(document).ready(function() {
-      // page is now ready, initialize the calendar...
-      debugger
-      $('#calendar').fullCalendar({
-        events: options.makeEvents,
-        dayClick: function() { 
-            alert('a day has been clicked!');
-          }
-        
-        })
-      });
-  </script>
-
   <title>Interactive Calendar</title>
 </head>
 <body>
   <div class="page-style">
     <div class="user-options">
       <div class="constraints">
-        <h2>Set Your Schedule</h2>
+
         <form action="">
-          <p>
-            <h4>Days Availble To Work</h4>
-            <label for="sunday"></label>
-            <input type="checkbox"  name="Sunday">Sunday
-            <input type="checkbox"  name="Monday">Monday
-            <input type="checkbox"  name="Tuesday">Tuesday
-            <input type="checkbox"  name="Wednesday">Wenesday
-            <input type="checkbox"  name="Thursday">Thursday
-            <input type="checkbox"  name="Friday">Friday
-            <input type="checkbox"  name="Saturday">Saturday
-          </p>                      
-          <p>
-            <h4>Daily Hours</h4>
-            <label for="startTime">Working Day Start Time: </label>
-            <input type="time" id="startTime"> 
-            <br>
-            <label for="endTime">Working Day End Time: </label>
-            <input type="time" id="endTime">  
-          </p>
-          <p>
-            <h4>Appointment Length</h4>
-          </p>
-          <p>
-            <h4></h4>
-          </p>
+            <h4>Days Available To Work</h4>
+            <ul>
+              <li>
+                <input id="sunday" type="checkbox"  name="Sunday">
+                <label for="sunday">Sunday</label>
+              </li>
+              <li>
+                <input id="monday" type="checkbox"  name="Monday">
+                <label for="monday">Monday</label>                
+              </li>
+              <li>
+                <input id="tuesday" type="checkbox"  name="Tuesday">
+                <label for="tuesday">Tuesday</label>                                
+              </li>
+              <li>
+                <input id="wednesday" type="checkbox"  name="Wednesday">
+                <label for="wednesday">Wednesday</label>                                
+              </li>
+              <li>
+                <input id="thursday" type="checkbox"  name="Thursday">
+                <label for="thursday">Thursday</label>                                                
+              </li>
+              <li>
+                <input id="friday" type="checkbox"  name="Friday">
+                <label for="friday">Friday</label>                                                
+              </li>
+              <li>
+                <input id="saturday" type="checkbox"  name="Saturday">
+                <label for="saturday">Saturday</label>                                                
+              </li>
+            </ul>
+
+            <h4>Open Hours</h4>
+              <table>
+                <tr>
+                  <td><label for="startTime">Working Day Start Time </label></td>
+                  <td><input id="startTime" type="time"></td>
+                </tr>
+                <tr>
+                    <td><label for="endTime">Working Day End Time </label></td>
+                    <td><input id="endTime" type="time"></td>
+                </tr>
+              </table>
+
+
+            <h4>Appointment Details</h4>
+            <table>
+              <tr>
+                <td><label for="appLength">Appointment Length (min) </label></td>
+                <td><input id="appLength" type="number"></td>
+              </tr>
+              <tr>
+                  <td><label for="appLength">Time Between Appointments (min) </label></td>
+                  <td><input id="appLength" type="number"></td>
+              </tr>
+            </table>
+
           <button id="my-next-button">Populate Calendar</button>
         </form>
+
+
         <script>
-            const options = {
-              makeEvents: null
-            }
             var form = document.querySelector("form");
             form.addEventListener("submit", event => {
               event.preventDefault();
-              console.log("Creating Appointments");
-              options.makeEvents = [{
-                title: 'Appointment',
-                start: '2018-02-13T13:00:00',
-                end: '2018-02-13T14:00:00'
-              },
-              {
-                title: 'Appointment',
-                start: '2018-02-14T13:00:00',
-                end: '2018-02-14T14:00:00'
-              }]
               
-              return $('#calendar').fullCalendar( 'rerenderEvents' )
-              // $('#calendar').fullCalendar('render');
+              const eventArr = []
+              
+              let tomorrow  = moment(new Date()).add(1,'days');
+              console.log(tomorrow);
+
+              console.log("Creating Appointments");              
+              $('#calendar').fullCalendar({
+                forceEventDuration: true,
+                // defaultTimedEventDuration: time,  
+                events: eventArr,
+                eventLimit: true,
+                eventClick: function(calEvent, jsEvent, view) { 
+                    alert('an event has been clicked!');
+                    $(this).css('border-color', 'red');
+                  }                
+                })
             });
-            </script>
+          </script>
       </div>
       <div className="taken-times">
-        <h2>Taken Time Slots</h2>
+        <h3>Booked Appointments</h3>
       </div>      
     </div>
     <div class="calendar-container">
@@ -94,6 +114,9 @@
 </body>
 </html>
 
+
+<!-- return $('#calendar').fullCalendar( 'rerenderEvents' ) -->
+<!-- $('#calendar').fullCalendar('render'); -->
 <!-- 
 var Sunday = form.elements.Sunday.value;              
 var start = form.elements.startTime.value;
@@ -105,3 +128,34 @@ value="Wednesday"
 value="Thursday"
 value="Friday"
 value="Saturday" -->
+
+<!-- 
+options.makeEvents = [{
+  title: 'Available',
+  start: '2018-02-13T13:00:00',
+},
+{
+  title: 'Available',
+  start: '2018-02-13T14:00:00',
+},
+{
+  title: 'Available',
+  start: '2018-02-13T15:00:00',
+},
+{
+  title: 'Available',
+  start: '2018-02-13T16:00:00',
+},
+{
+  title: 'Available',
+  start: '2018-02-13T17:00:00',
+},
+{
+  title: 'Available',
+  start: '2018-02-13T18:00:00',
+},
+{
+  title: 'Appointment',
+  start: '2018-02-14T13:00:00',
+  end: '2018-02-14T14:00:00'
+}]; -->
