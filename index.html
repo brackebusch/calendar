@@ -53,12 +53,12 @@
             <h4>Open Hours</h4>
               <table>
                 <tr>
-                  <td><label for="startTime">Working Day Start Time </label></td>
-                  <td><input id="startTime" type="time"></td>
+                  <td><label for="dayStart">Working Day Start Time </label></td>
+                  <td><input id="dayStart" type="time" value="08:00"></td>
                 </tr>
                 <tr>
-                    <td><label for="endTime">Working Day End Time </label></td>
-                    <td><input id="endTime" type="time"></td>
+                    <td><label for="dayEnd">Working Day End Time </label></td>
+                    <td><input id="dayEnd" type="time" value="17:00"></td>
                 </tr>
               </table>
 
@@ -67,7 +67,7 @@
             <table>
               <tr>
                 <td><label for="appLength">Appointment Length</label></td>
-                <td><input id="appLength" type="number"></td>
+                <td><input id="appLength" type="number" value="50"></td>
                 <td>
                 <select id="appLengthFormat">
                   <option value="minutes" selected="selected">Min</option>
@@ -77,7 +77,7 @@
               </tr>
               <tr>
                   <td><label for="buggerLength">Time Buffer Between Appointments</label></td>
-                  <td><input id="bufferLength" type="number"></td>
+                  <td><input id="bufferLength" type="number" value="10"></td>
                   <td>
                     <select id="bufferLengthFormat">
                       <option value="minutes" selected="selected">Min</option>
@@ -86,10 +86,10 @@
                   </td>
               </tr>
               <tr>
-                <td>Earliest Available Appointment</td>
-                <td><input id="notice" type="number"></td>
+                <td>Earliest Available Appointment From Now</td>
+                <td><input id="advanceNotice" type="number" value="12"></td>
                 <td>
-                  <select id="noticeFormat">
+                  <select id="advanceNoticeFormat">
                     <option value="m">minutes</option>                    
                     <option value="h" selected="selected">hour</option>
                     <option value="d">day</option>
@@ -107,43 +107,68 @@
             var form = document.querySelector("form");
             form.addEventListener("submit", event => {
               event.preventDefault();
+              let appLength, bufferLength = null;
 
-              console.log(form.elements);
-              console.log(form.elements[7].value)
+              //converts all given times to minutes
+              if (form.elements.appLengthFormat.value === "hours") {
+                appLength = form.elements.appLength.value * 60
+              } else {
+                appLength = form.elements.appLength.value
+              }
+
+              if (form.elements.bufferLengthFormat.value === "hours") {
+                bufferLength = form.elements.bufferLength.value * 60
+              } else {
+                bufferLength = form.elements.bufferLength.value
+              }
+            
+              console.log(bufferLength);
+              console.log(appLength);
               
-              let buffer = form.elements.notice.value
-              let noticeFormat = form.elements.noticeFormat.value
-              let appLength = parseInt(form.elements.appLength.value) + parseInt(form.elements.bufferLength.value)
-              timeStyle = form.elements.appLengthFormat.value
-
-              console.log(buffer);             
-              console.log(noticeFormat);
-              console.log(appLength)
-
-              let m = moment().endOf('day').add(buffer, noticeFormat)
-              let startTime = m.minute() || m.second() || m.millisecond() ? m.add(1, 'hour').startOf('hour') : m.startOf('hour');
-              console.log(startTime)
               debugger
 
+              // let appLength = parseInt(form.elements.appLength.value) + parseInt(form.elements.bufferLength.value)
+              // console.log(appLength)
+
+              timeStyle = form.elements.appLengthFormat.value
+
+              const workingDays = [];
+              for (let i = 0; i < 7; i++) {
+                if (form.elements[i].checked) {
+                  workingDays.push(i);
+                }
+              }
+
+              // let m = moment().endOf('day').add(buffer, noticeFormat)
+              // let dayStart = m.minute() || m.second() || m.millisecond() ? m.add(1, 'hour').startOf('hour') : m.startOf('hour');
+              // console.log(dayStart)
+
+              let m = moment().add(1, 'hour').startOf('hour')
+              let m2 = moment(m).add(appLength, 'm')
+              // debugger
+              
               $('#calendar').fullCalendar({
+                eventConstraint: {
+                      start: form.elements.dayStart.value,
+                      end: form.elements.dayEnd.value,
+                      dow: workingDays
+                  },
+                defaultTimedEventDuration: appLength,
                 forceEventDuration: true,
                 events: [{
                       title: "Appt",
-                      start: startTime
+                      start: m
                       },
                       {
-                      title: "Appt",
-                      start: startTime.add(appLength, timeStyle)
-                      },
-                      {
-                      title: "Appt",
-                      start: startTime.add(appLength, timeStyle).add(appLength, timeStyle)
+                        title: "Appt2",
+                        start: m2                      
                       }],
                 eventLimit: true,
                 eventClick: function(calEvent, jsEvent, view) { 
                   $(this).css('backgroundColor', 'gray');
                 }                
               })
+              $('#calendar').fullCalendar('render');              
             });
             </script>
       </div>
