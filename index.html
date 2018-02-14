@@ -66,16 +66,29 @@
             <h4>Appointment Details</h4>
             <table>
               <tr>
-                <td><label for="appLength">Appointment Length (min) </label></td>
+                <td><label for="appLength">Appointment Length</label></td>
                 <td><input id="appLength" type="number"></td>
+                <td>
+                <select>
+                  <option>Min</option>
+                  <option>Hr</option>
+                </select>
+              </td>
               </tr>
               <tr>
-                  <td><label for="appLength">Time Between Appointments (min) </label></td>
+                  <td><label for="appLength">Time Between Appointments</label></td>
                   <td><input id="appLength" type="number"></td>
+                  <td>
+                    <select>
+                      <option>Min</option>
+                      <option>Hr</option>
+                    </select>
+                  </td>
               </tr>
             </table>
-
-          <button id="my-next-button">Populate Calendar</button>
+          
+            <button>Populate Calendar</button>
+          <!-- <input type="button" name="submit" value="Populate Calendar" onclick=""> -->
         </form>
 
 
@@ -83,25 +96,27 @@
             var form = document.querySelector("form");
             form.addEventListener("submit", event => {
               event.preventDefault();
-              
-              const eventArr = []
-              
-              let tomorrow  = moment(new Date()).add(1,'days');
-              console.log(tomorrow);
 
-              console.log("Creating Appointments");              
+              console.log(form.elements);
+              console.log(form.elements[7].value)
+
+              let startTime = form.elements[7].value
+              moment().endOf('day').add()
+
               $('#calendar').fullCalendar({
                 forceEventDuration: true,
-                // defaultTimedEventDuration: time,  
-                events: eventArr,
+                events: [{
+                 title: "Appointment",
+                 start: moment(`${startTime}`, "HH-MM")
+                }],
                 eventLimit: true,
                 eventClick: function(calEvent, jsEvent, view) { 
-                    alert('an event has been clicked!');
-                    $(this).css('border-color', 'red');
-                  }                
-                })
+                  alert('an event has been clicked!');
+                  $(this).css('border-color', 'red');
+                }                
+              })
             });
-          </script>
+            </script>
       </div>
       <div className="taken-times">
         <h3>Booked Appointments</h3>
@@ -114,16 +129,20 @@
 </body>
 </html>
 
+<!-- const eventArr = []
+start = form.elements
+let tomorrow  = moment(new Date()).add(1,'days');
+console.log(tomorrow); -->
 
 <!-- return $('#calendar').fullCalendar( 'rerenderEvents' ) -->
 <!-- $('#calendar').fullCalendar('render'); -->
 <!-- 
-var Sunday = form.elements.Sunday.value;              
-var start = form.elements.startTime.value;
-var end = form.elements.endTime.value;
-value="Sunday"
-value="Monday"
-value="Tuesday"
+  var Sunday = form.elements.Sunday.value;              
+  var start = form.elements.startTime.value;
+  var end = form.elements.endTime.value;
+  value="Sunday"
+  value="Monday"
+  value="Tuesday"
 value="Wednesday"
 value="Thursday"
 value="Friday"
