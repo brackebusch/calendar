@@ -99,19 +99,30 @@
               </tr>
             </table>
           
-            <button>Populate Calendar</button>
+            <button id="checkBtn">Populate Calendar</button>
         </form>
 
 
         <script>
+            $(document).ready(function () {
+                $('#checkBtn').click(function() {
+                  checked = $("input[type=checkbox]:checked").length;
+                  if(!checked) {
+                    alert("You must check at least one day to Work.");
+                    return false;
+                  } else if (form.elements.dayStart.value > form.elements.dayEnd.value) {
+                    alert("You cannot end work earlier than you begin.");
+                    return false;
+                  }
+                });
+            });
+
             var form = document.querySelector("form");
             form.addEventListener("submit", event => {
               event.preventDefault();
               let appLength, bufferLength = null;
               let dayStart = form.elements.dayStart.value;
               let dayEnd = form.elements.dayEnd.value;
-
-
 
               if (form.elements.appLengthFormat.value === "hours") {
                 appLength = form.elements.appLength.value * 60
@@ -135,36 +146,35 @@
                 }
               }
 
-              // let m = moment().add(1, 'hour').startOf('hour')
-              // let createMoment = moment(m).add(timeToBookInteger, 'm')
-              
-              let createMoment = moment().add(1, 'hour').startOf('hour')
+              const startMin = Math.floor(form.elements.dayStart.valueAsNumber / 60000);
+              const endMin = Math.floor(form.elements.dayEnd.valueAsNumber / 60000);
 
+              const openHours = (m) => {
+                m = m.minutes() + m.hours() * 60;
+                return startMin < m && m < endMin 
+              }
+
+              const validAppointment = (m) => {
+                return ( (workingDays.includes(m.day()) && openHours(m)) );
+              }
+
+              
+              const startInt = form.elements.advanceNotice.value;
+              const startType = form.elements.advanceNoticeFormat.value;
               let i = 0;
               const eventArr = [];
 
-              const minutesOfDay = (m) => {
-                return m.minutes() + m.hours() * 60;
-              }
-
-              const datStartMin = (form.elements.dayStart.value, time) => {
-                return 
-              }
-
-
-              return minutesOfDay(now) > minutesOfDay(end);
-              
+              let createMoment = moment().add(startInt, startType).startOf('hour')
               while (i < 20) {
                 createMoment = moment(createMoment).add(timeToBookInteger, 'm')
-                // createMoment.isBetween() && 
-                if (workingDays.includes(createMoment.day())) {
+
+                if (validAppointment(createMoment)) {
                   eventArr.push({
                       title: ("Appt " + i),
                       start: createMoment
                     })
-                }                
                 i++;
-                debugger
+                }                
               }
 
               $('#calendar').fullCalendar({
@@ -176,9 +186,10 @@
                 defaultTimedEventDuration: duration,
                 forceEventDuration: true,
                 events: eventArr,
-                eventLimit: true,
-                eventClick: function(calEvent, jsEvent, view) { 
+                // eventLimit: true,
+                eventClick: function(calEvent, jsEvent, view) {
                   $(this).css('backgroundColor', 'gray');
+                  $(this).css('color', 'black');
                 }                
               })          
             });
@@ -194,55 +205,3 @@
   </div>
 </body>
 </html>
-
-<!-- const eventArr = []
-start = form.elements
-let tomorrow  = moment(new Date()).add(1,'days');
-console.log(tomorrow); -->
-
-<!-- return $('#calendar').fullCalendar( 'rerenderEvents' ) -->
-<!-- $('#calendar').fullCalendar('render'); -->
-<!-- 
-  var Sunday = form.elements.Sunday.value;              
-  var start = form.elements.startTime.value;
-  var end = form.elements.endTime.value;
-  value="Sunday"
-  value="Monday"
-  value="Tuesday"
-value="Wednesday"
-value="Thursday"
-value="Friday"
-value="Saturday" -->
-
-<!-- $('#calendar').fullCalendar('render');     -->
-
-
-<!-- options.makeEvents = [{
-  title: 'Available',
-  start: '2018-02-13T13:00:00',
-},
-{
-  title: 'Available',
-  start: '2018-02-13T14:00:00',
-},
-{
-  title: 'Available',
-  start: '2018-02-13T15:00:00',
-},
-{
-  title: 'Available',
-  start: '2018-02-13T16:00:00',
-},
-{
-  title: 'Available',
-  start: '2018-02-13T17:00:00',
-},
-{
-  title: 'Available',
-  start: '2018-02-13T18:00:00',
-},
-{
-  title: 'Appointment',
-  start: '2018-02-14T13:00:00',
-  end: '2018-02-14T14:00:00'
-}]; -->
