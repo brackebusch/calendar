@@ -54,11 +54,11 @@
               <table>
                 <tr>
                   <td><label for="dayStart">Working Day Start Time </label></td>
-                  <td><input id="dayStart" type="time" value="08:00"></td>
+                  <td><input id="dayStart" type="time" value="08:00" required></td>
                 </tr>
                 <tr>
                     <td><label for="dayEnd">Working Day End Time </label></td>
-                    <td><input id="dayEnd" type="time" value="17:00"></td>
+                    <td><input id="dayEnd" type="time" value="17:00" required></td>
                 </tr>
               </table>
 
@@ -70,14 +70,14 @@
                 <td><input id="appLength" type="number" value="50"></td>
                 <td>
                 <select id="appLengthFormat">
-                  <option value="minutes" selected="selected">Min</option>
+                  <option value="minutes" selected="selected" step="1" pattern="\d+" required>Min</option>
                   <option value="hours">Hr</option>
                 </select>
               </td>
               </tr>
               <tr>
                   <td><label for="buggerLength">Time Buffer Between Appointments</label></td>
-                  <td><input id="bufferLength" type="number" value="10"></td>
+                  <td><input id="bufferLength" type="number" value="10" step="1" pattern="\d+" required></td>
                   <td>
                     <select id="bufferLengthFormat">
                       <option value="minutes" selected="selected">Min</option>
@@ -87,7 +87,7 @@
               </tr>
               <tr>
                 <td>Earliest Available Appointment From Now</td>
-                <td><input id="advanceNotice" type="number" value="12"></td>
+                <td><input id="advanceNotice" type="number" value="12" step="1" pattern="\d+"></td>
                 <td>
                   <select id="advanceNoticeFormat">
                     <option value="m">minutes</option>                    
@@ -108,8 +108,11 @@
             form.addEventListener("submit", event => {
               event.preventDefault();
               let appLength, bufferLength = null;
+              let dayStart = form.elements.dayStart.value;
+              let dayEnd = form.elements.dayEnd.value;
 
-              //converts all given times to minutes
+
+
               if (form.elements.appLengthFormat.value === "hours") {
                 appLength = form.elements.appLength.value * 60
               } else {
@@ -121,16 +124,9 @@
               } else {
                 bufferLength = form.elements.bufferLength.value
               }
-            
-              console.log(bufferLength);
-              console.log(appLength);
-              
-              debugger
 
-              // let appLength = parseInt(form.elements.appLength.value) + parseInt(form.elements.bufferLength.value)
-              // console.log(appLength)
-
-              timeStyle = form.elements.appLengthFormat.value
+              timeToBookInteger = parseInt(appLength) + parseInt(bufferLength);
+              duration = moment.duration((parseInt(appLength) + parseInt(bufferLength)), 'minutes');
 
               const workingDays = [];
               for (let i = 0; i < 7; i++) {
@@ -139,36 +135,52 @@
                 }
               }
 
-              // let m = moment().endOf('day').add(buffer, noticeFormat)
-              // let dayStart = m.minute() || m.second() || m.millisecond() ? m.add(1, 'hour').startOf('hour') : m.startOf('hour');
-              // console.log(dayStart)
-
-              let m = moment().add(1, 'hour').startOf('hour')
-              let m2 = moment(m).add(appLength, 'm')
-              // debugger
+              // let m = moment().add(1, 'hour').startOf('hour')
+              // let createMoment = moment(m).add(timeToBookInteger, 'm')
               
+              let createMoment = moment().add(1, 'hour').startOf('hour')
+
+              let i = 0;
+              const eventArr = [];
+
+              const minutesOfDay = (m) => {
+                return m.minutes() + m.hours() * 60;
+              }
+
+              const datStartMin = (form.elements.dayStart.value, time) => {
+                return 
+              }
+
+
+              return minutesOfDay(now) > minutesOfDay(end);
+              
+              while (i < 20) {
+                createMoment = moment(createMoment).add(timeToBookInteger, 'm')
+                // createMoment.isBetween() && 
+                if (workingDays.includes(createMoment.day())) {
+                  eventArr.push({
+                      title: ("Appt " + i),
+                      start: createMoment
+                    })
+                }                
+                i++;
+                debugger
+              }
+
               $('#calendar').fullCalendar({
                 eventConstraint: {
-                      start: form.elements.dayStart.value,
-                      end: form.elements.dayEnd.value,
+                      start: dayStart,
+                      end: dayEnd,
                       dow: workingDays
                   },
-                defaultTimedEventDuration: appLength,
+                defaultTimedEventDuration: duration,
                 forceEventDuration: true,
-                events: [{
-                      title: "Appt",
-                      start: m
-                      },
-                      {
-                        title: "Appt2",
-                        start: m2                      
-                      }],
+                events: eventArr,
                 eventLimit: true,
                 eventClick: function(calEvent, jsEvent, view) { 
                   $(this).css('backgroundColor', 'gray');
                 }                
-              })
-              $('#calendar').fullCalendar('render');              
+              })          
             });
             </script>
       </div>
@@ -201,6 +213,8 @@ value="Wednesday"
 value="Thursday"
 value="Friday"
 value="Saturday" -->
+
+<!-- $('#calendar').fullCalendar('render');     -->
 
 
 <!-- options.makeEvents = [{
