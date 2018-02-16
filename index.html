@@ -11,7 +11,8 @@
   <script src='lib/jquery.min.js'></script>
   <script src='lib/moment.min.js'></script>
   <script src='fullcalendar.js'></script>
-  
+  <script src='index.js'></script>
+
   <title>Interactive Calendar</title>
 </head>
 <body>
@@ -19,7 +20,8 @@
   <div class="page-style">
     <div class="user-options">
       <div class="taken-times">
-        <p>This application is designed for owners of a small business to set their availaility for clients to book themselves appointments. The menue on the left is for the business owner to set their availability, and the generated calendar is for users to interact with and book appointments.</p>
+        <p>This application is designed for owners of a small business to set their availability for clients to book themselves appointments.<br><br> The menu on the left is for a business owner (counselor, home inspector, masseuse, etc.) to set their availability.<br><br> The generated calendar is for users to interact with and book appointments.
+          </p>
       </div>
 
       <div class="constraints">
@@ -95,101 +97,6 @@
           
             <button id="checkBtn">Populate Calendar</button>
         </form>
-
-
-        <script>
-            $(document).ready(function () {
-                $('#checkBtn').click(function() {
-                  checked = $("input[type=checkbox]:checked").length;
-                  if(!checked) {
-                    alert("You must check at least one day to Work.");
-                    return false;
-                  } else if (form.elements.dayStart.value > form.elements.dayEnd.value) {
-                    alert("You cannot end work earlier than you begin.");
-                    return false;
-                  }
-                });
-            });
-
-            var form = document.querySelector("form");
-            form.addEventListener("submit", event => {
-              event.preventDefault();
-              let appLength, bufferLength = null;
-              let dayStart = form.elements.dayStart.value;
-              let dayEnd = form.elements.dayEnd.value;
-
-              if (form.elements.appLengthFormat.value === "hours") {
-                appLength = form.elements.appLength.value * 60
-              } else {
-                appLength = form.elements.appLength.value
-              }
-
-              if (form.elements.bufferLengthFormat.value === "hours") {
-                bufferLength = form.elements.bufferLength.value * 60
-              } else {
-                bufferLength = form.elements.bufferLength.value
-              }
-
-              timeToBookInteger = parseInt(appLength) + parseInt(bufferLength);
-              duration = moment.duration((parseInt(appLength) + parseInt(bufferLength)), 'minutes');
-
-              const workingDays = [];
-              for (let i = 0; i < 7; i++) {
-                if (form.elements[i].checked) {
-                  workingDays.push(i);
-                }
-              }
-
-              const startMin = Math.floor(form.elements.dayStart.valueAsNumber / 60000);
-              const endMin = Math.floor(form.elements.dayEnd.valueAsNumber / 60000);
-
-              const openHours = (m) => {
-                m = m.minutes() + m.hours() * 60;
-                return startMin < m && m < endMin 
-              }
-
-              const validAppointment = (m) => {
-                return ( (workingDays.includes(m.day()) && openHours(m)) );
-              }
-
-              
-              const startInt = form.elements.advanceNotice.value;
-              const startType = form.elements.advanceNoticeFormat.value;
-              let i = 0;
-              const eventArr = [];
-
-              let createMoment = moment().add(startInt, startType).startOf('hour')
-              while (i < 20) {
-                createMoment = moment(createMoment).add(timeToBookInteger, 'm')
-
-                if (validAppointment(createMoment)) {
-                  eventArr.push({
-                      title: ("Appt " + i),
-                      start: createMoment
-                    })
-                i++;
-                }                
-              }
-
-              $('#calendar').fullCalendar({
-                eventConstraint: {
-                      start: dayStart,
-                      end: dayEnd,
-                      dow: workingDays
-                  },
-                defaultTimedEventDuration: duration,
-                forceEventDuration: true,
-                events: eventArr,
-                eventColor: '#FFD8AA',
-                eventTextColor: '#804E15',
-                // eventLimit: true,
-                eventClick: function(calEvent, jsEvent, view) {
-                  $(this).css('backgroundColor', 'gray');
-                  $(this).css('color', 'black');
-                }                
-              })          
-            });
-            </script>
       </div>      
     </div>
     <div class="calendar-container">
