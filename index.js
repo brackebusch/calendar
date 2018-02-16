@@ -9,7 +9,7 @@ $(document).ready(function () {
         alert("You cannot end work earlier than you begin.");
         return false;
       }
-    });
+    })
 });
 
 var form = document.querySelector("form");
