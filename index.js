@@ -7,8 +7,11 @@ $(document).ready(function () {
     } else if (form.elements.dayStart.value > form.elements.dayEnd.value) {
       alert('You cannot end work earlier than you begin.')
       return false
+    } else if (form.elements.lunchStart.value > form.elements.lunchEnd.value) {
+      alert('You need your strength, don\'t skip lunch =)')
+      return false
     }
-  })
+})
 })
 
 let form = document.querySelector('form')
@@ -21,6 +24,8 @@ form.addEventListener('submit', event => {
   let bufferLength = null
   let dayStart = form.elements.dayStart.value
   let dayEnd = form.elements.dayEnd.value
+
+
 
   if (form.elements.appLengthFormat.value === 'hours') {
     appLength = form.elements.appLength.value * 60
@@ -46,10 +51,12 @@ form.addEventListener('submit', event => {
 
   const startMin = Math.floor(form.elements.dayStart.valueAsNumber / 60000)
   const endMin = Math.floor(form.elements.dayEnd.valueAsNumber / 60000)
+  const lunchStartMin = Math.floor(form.elements.lunchStart.valueAsNumber / 60000)
+  const lunchEndMin = Math.floor(form.elements.lunchEnd.valueAsNumber / 60000)
 
   const openHours = (m) => {
     m = m.minutes() + m.hours() * 60;
-    return startMin < m && m < endMin
+    return (startMin < m && m < lunchStartMin) || (lunchEndMin < m && m < endMin)
   }
 
   const validAppointment = (m) => {
@@ -61,8 +68,8 @@ form.addEventListener('submit', event => {
   let i = 0
 
   let createMoment = moment().add(startInt, startType).startOf('hour')
-  debugger
-  while (i < 80) {
+
+  while (i < 40) {
     createMoment = moment(createMoment).add(timeToBookInteger, 'm')
 
     if (validAppointment(createMoment)) {
@@ -71,13 +78,16 @@ form.addEventListener('submit', event => {
         title: ('Available'),
         start: createMoment,
         selected: false,
-        backgroundColor: '#FFD8AA',
-        textColor: '#804E15'
+        backgroundColor: '#f1c40f',
+        textColor: '#000',
+        borderColor: '#f39c12'
       })
       i++
     }
   }
 
+  $('#calendar').fullCalendar('removeEvents')
+  $('#calendar').fullCalendar('renderEvents', eventArr, true)
   $('#calendar').fullCalendar({
     eventConstraint: {
       start: dayStart,
@@ -89,11 +99,13 @@ form.addEventListener('submit', event => {
     events: eventArr,
     eventClick: function (calEvent, jsEvent, view) {
       if (calEvent.selected) {
-        if (confirm('Would you like to cancel your appointment on ' + eventArr[calEvent.id].start.format("dddd, MMMM Do YYYY, h:mm a") + "?")) {
+        if (confirm('Would you like to cancel your appointment on ' + 
+        eventArr[calEvent.id].start.format("dddd, MMMM Do, h:mm a") + "?")) {
           eventArr[calEvent.id].selected = !eventArr[calEvent.id].selected
           renderEventValues()
         }
-      } else if (confirm('Would you like to book an appointment on ' + eventArr[calEvent.id].start.format("dddd, MMMM Do YYYY, h:mm a") + "?")) {
+      } else if (confirm('Would you like to book an appointment on ' + 
+      eventArr[calEvent.id].start.format("dddd, MMMM Do, h:mm a") + "? (Appointments are " + appLength + " " + form.elements.appLengthFormat.value + ")")) {
         eventArr[calEvent.id].selected = !eventArr[calEvent.id].selected
         renderEventValues()
       }
@@ -122,8 +134,10 @@ const renderEventValues = () => {
       element.appendChild(listItem)
     } else {
       eventArr[index].title = 'Available'
-      eventArr[index].backgroundColor = '#FFD8AA'
-      eventArr[index].textColor = '#804E15'
+      eventArr[index].backgroundColor = '#f1c40f'
+      eventArr[index].textColor = '#000'
+      eventArr[index].borderColor = '#f39c12'
+      
       if (document.contains(document.getElementById(eventArr[index].id.toString()))) {
         document.getElementById(eventArr[index].id.toString()).remove()
       }

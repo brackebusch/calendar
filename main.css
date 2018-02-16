@@ -10,7 +10,10 @@ body {
   min-height: 100%;
   width: 100%;
   font-family: 'Lato', sans-serif;
-  background: #e8e9ea;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #ecf0f1;
+  color: #2c3e50;  
 }
 
 h1 {
@@ -41,8 +44,7 @@ h1 {
 .constraints, .taken-times, .booked-appointments {
   margin-bottom: 5vh;
   padding: 15px;
-  background: #FFD8AA;
-  color: #1D4648;
+  background: #f1c40f;
   border-radius: 5px;
   box-shadow: 1px 1px 1px grey;
 }
@@ -57,39 +59,28 @@ form{
   flex-direction: column;
 }
 
-button {
-  margin-top: 1em;
-  align-self: center;
-  width: 50%;
-  text-align: center;
-  border-radius: 3px;
-  padding: 8px;
-  color: #FFD8AA; 
-  font-weight: 600;
-  background: #804E15;
-}
-
-button:hover {
-  background: #D4A36A;
-  color: #804E15; 
-}
-
-div h2 {
-  padding: 1em 0em .5em 0em;
+h2 {
+  padding: .5em 0em .5em 0em;
+  text-decoration: underline;
   margin: 0;
-  color: #1D4648;
-  font-weight: 600;
+  font-weight: 800;
+}
+
+.fc-right {
+  width: 15em;
 }
 
 #calendar h2 {
+  font-size: 1.5rem;
   padding-left: 1em;
-  color: #1D4648;
+  color: #7f8c8d;
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .open-hours tr td:nth-child(2) {
   max-width: 120px;
-  background: #D4A36A;
-  color: #202020;
+  background: #f39c12;
 }
 
 td > input {
@@ -102,14 +93,16 @@ td {
 
 .appointment-details tr td:nth-child(2)  {
   max-width: 40px;
-  background: #D4A36A;  
-  color: #132829;  
+  background: #f39c12;  
   text-align: center
 }
 
+.open-hours, .availability, .appointment-details {
+  padding-bottom: 2em;
+}
+
 select {
-  background: #D4A36A;  
-  color: #132829;  
+  background: #f39c12;  
   border: none;
   text-align: center;
   border-radius: 2px;
@@ -122,10 +115,26 @@ input[type=checkbox] {
   left: -9999px;
 }
 
+button {
+  margin-top: 1em;
+  align-self: center;
+  width: 50%;
+  text-align: center;
+  border-radius: 3px;
+  padding: 8px;
+  font-weight: 600;
+  background: #2ecc71;
+}
+
+button:hover {
+  background: #27ae60;
+}
+
 input[type=checkbox] + label { 
  cursor: pointer;
  width: 95px;
- background: #D4A36A;
+ background: #f1c40f;
+ border: 1px solid #7f8c8d;
  border-radius: 3px;
  padding: 5px;
  margin: 10px 0px 10px 0px;
@@ -133,18 +142,12 @@ input[type=checkbox] + label {
 }
 
 input[type=checkbox]:checked + label {
-  background: #552E00;
-  color: #FFD8AA;
+  background: #2ecc71;
+  border: 1px solid #2ecc71;
 }
 
-.color-primary-0 { color: #AA7539 }	/* Main Primary color */
-.color-primary-1 { color: #FFD8AA }
-.color-primary-2 { color: #D4A36A }
-.color-primary-3 { color: #804E15 }
-.color-primary-4 { color: #552E00 }
-
 input:focus, input[type]:focus {   
-  box-shadow: 0 1px 1px #1D4648 inset, 0 0 8px #132829;
+  box-shadow: 0 1px 1px #00362B inset, 0 0 8px #00362B;
   outline: 0 none;
 }
 
@@ -160,4 +163,8 @@ input[type=number] {
 input[type=time]::-webkit-inner-spin-button, 
 input[type=time]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
+}
+
+.fc-today {
+  background: #bdc3c7 !important;
 }

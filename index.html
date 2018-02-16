@@ -1,103 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel='stylesheet' href='css-reset.css' />  
+  <link rel='stylesheet' href='css-reset.css' />
   <link rel='stylesheet' href='fullcalendar.css' />
-  <link rel='stylesheet' href='main.css' />  
+  <link rel='stylesheet' href='main.css' />
   <script src='lib/jquery.min.js'></script>
   <script src='lib/moment.min.js'></script>
   <script src='fullcalendar.js'></script>
 
   <title>Interactive Calendar</title>
 </head>
+
 <body>
-  <h1>Appointment Generator</h1>  
+  <h1>Appointment Generator</h1>
   <div class="page-style">
     <div class="user-options">
       <div class="taken-times">
-        <p>This application is designed for owners of a small business to set their availability for clients to book themselves appointments.<br><br> The menu on the left is for a business owner (counselor, home inspector, masseuse, etc.) to set their availability.<br><br> The generated calendar is for users to interact with and book appointments.
-          </p>
+        <h2>About</h2>
+        <p>This application is designed for owners of a small business to set their availability for clients to book themselves
+          appointments.
+          <br>
+          <br> The menu on the left is for a business owner (counselor, home inspector, masseuse, etc.) to set their availability.
+          <br>
+          <br> The generated calendar is for users to interact with and book appointments.
+        </p>
       </div>
 
       <div class="constraints">
         <form>
-          <div>
-            <h2>Days Available To Work</h2>
-                <input id="sunday" type="checkbox"  name="Sunday">
-                <label for="sunday">Sunday</label>
+          <div class="availability">
+            <h2>Business Week</h2>
+            <input id="sunday" type="checkbox" name="Sunday">
+            <label for="sunday">Sunday</label>
 
-                <input id="monday" type="checkbox"  name="Monday" checked>
-                <label for="monday">Monday</label>                
+            <input id="monday" type="checkbox" name="Monday" checked>
+            <label for="monday">Monday</label>
 
-                <input id="tuesday" type="checkbox"  name="Tuesday" checked>
-                <label for="tuesday">Tuesday</label>                                
+            <input id="tuesday" type="checkbox" name="Tuesday" checked>
+            <label for="tuesday">Tuesday</label>
 
-                <input id="wednesday" type="checkbox"  name="Wednesday" checked>
-                <label for="wednesday">Wednesday</label>                                
-                <input id="thursday" type="checkbox"  name="Thursday" checked>
-                <label for="thursday">Thursday</label>                                                
-                <input id="friday" type="checkbox"  name="Friday" checked>
-                <label for="friday">Friday</label>                                                
-                <input id="saturday" type="checkbox"  name="Saturday">
-                <label for="saturday">Saturday</label>                          
-          </div>          
+            <input id="wednesday" type="checkbox" name="Wednesday" checked>
+            <label for="wednesday">Wednesday</label>
+            <input id="thursday" type="checkbox" name="Thursday" checked>
+            <label for="thursday">Thursday</label>
+            <input id="friday" type="checkbox" name="Friday" checked>
+            <label for="friday">Friday</label>
+            <input id="saturday" type="checkbox" name="Saturday" >
+            <label for="saturday">Saturday</label>
+          </div>
+
+          <table class="open-hours">
             <h2>Open Hours</h2>
-              <table class="open-hours"> 
-                <tr>
-                  <td><label for="dayStart">Working Day Start Time </label></td>
-                  <td><input id="dayStart" type="time" value="08:00" required></td>
-                </tr>
-                <tr>
-                    <td><label for="dayEnd">Working Day End Time </label></td>
-                    <td><input id="dayEnd" type="time" value="17:00" required></td>
-                </tr>
-              </table>
+            <tr>
+              <td>
+                <label for="dayStart">Business Open </label>
+              </td>
+              <td>
+                <input id="dayStart" type="time" value="08:00" required>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="dayEnd">Business Close </label>
+              </td>
+              <td>
+                <input id="dayEnd" type="time" value="17:00" required>
+              </td>
+            </tr>
+          </table>
 
-
-            <h2>Appointment Details</h2>
-            <table class="appointment-details">
+          <table class="open-hours">
+              <h2>Lunch Break</h2>
               <tr>
-                <td><label for="appLength">Appointment Length</label></td>
-                <td><input id="appLength" type="number" value="50"></td>
                 <td>
-                  <select id="appLengthFormat">
-                    <option value="minutes" selected="selected" step="1" pattern="\d+" required>Minutes</option>
-                    <option value="hours">Hours</option>
-                  </select>
+                  <label for="lunchStart">Start Time </label>
+                </td>
+                <td>
+                  <input id="lunchStart" type="time" value="12:00" required>
                 </td>
               </tr>
               <tr>
-                  <td><label for="buggerLength">Time Between Appointments</label></td>
-                  <td><input id="bufferLength" type="number" value="10" step="1" pattern="\d+" required></td>
-                  <td>
-                    <select id="bufferLengthFormat">
-                      <option value="minutes" selected="selected">Minutes</option>
-                      <option value="hours">Hours</option>
-                    </select>
-                  </td>
-              </tr>
-              <tr>
-                <td>Earliest Available Appointment</td>
-                <td><input id="advanceNotice" type="number" value="12" step="1" pattern="\d+"></td>
                 <td>
-                  <select id="advanceNoticeFormat">
-                    <option value="m">Minutes</option>                    
-                    <option value="h" selected="selected">Hours</option>
-                    <option value="d">Days</option>
-                    <option value="w">Weeks</option>                    
-                  </select>
+                  <label for="lunchEnd">End Time </label>
+                </td>
+                <td>
+                  <input id="lunchEnd" type="time" value="13:00" required>
                 </td>
               </tr>
             </table>
-            <!-- <h2>Generate Appoinments Till Date</h2>
+
+
+          <table class="appointment-details">
+            <h2>Appointment Details</h2>
+            <tr>
+              <td>
+                <label for="appLength">Appointment Length</label>
+              </td>
+              <td>
+                <input id="appLength" type="number" value="50">
+              </td>
+              <td>
+                <select id="appLengthFormat">
+                  <option value="minutes" selected="selected" step="1" pattern="\d+" required>Minutes</option>
+                  <option value="hours">Hours</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="buggerLength">Time Between Appointments</label>
+              </td>
+              <td>
+                <input id="bufferLength" type="number" value="10" step="1" pattern="\d+" required>
+              </td>
+              <td>
+                <select id="bufferLengthFormat">
+                  <option value="minutes" selected="selected">Minutes</option>
+                  <option value="hours">Hours</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Earliest Available Appointment</td>
+              <td>
+                <input id="advanceNotice" type="number" value="12" step="1" pattern="\d+">
+              </td>
+              <td>
+                <select id="advanceNoticeFormat">
+                  <option value="m">Minutes</option>
+                  <option value="h" selected="selected">Hours</option>
+                  <option value="d">Days</option>
+                  <option value="w">Weeks</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+          <!-- <h2>Generate Appoinments Till Date</h2>
             <p>Date: <input type="text" id="datepicker"></p> -->
-            <button id="checkBtn">Populate Calendar</button>
+          <button id="checkBtn">Populate Calendar</button>
         </form>
-      </div>   
+      </div>
       <div class="booked-appointments">
         <h2>Booked Appointments</h2>
         <ul id="appointment-list">
@@ -110,4 +157,5 @@
   </div>
 </body>
 <script src='index.js'></script>
+
 </html>
