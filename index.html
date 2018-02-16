@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel='stylesheet' href='css-reset.css' />  
   <link rel='stylesheet' href='fullcalendar.css' />
   <link rel='stylesheet' href='main.css' />  
@@ -14,44 +15,36 @@
   <title>Interactive Calendar</title>
 </head>
 <body>
+  <h1>Appointment Generator</h1>  
   <div class="page-style">
     <div class="user-options">
-      <div class="constraints">
+      <div class="taken-times">
+        <p>This application is designed for owners of a small business to set their availaility for clients to book themselves appointments. The menue on the left is for the business owner to set their availability, and the generated calendar is for users to interact with and book appointments.</p>
+      </div>
 
+      <div class="constraints">
         <form action="">
-            <h4>Days Available To Work</h4>
-            <ul>
-              <li>
+          <div>
+            <h2>Days Available To Work</h2>
                 <input id="sunday" type="checkbox"  name="Sunday">
                 <label for="sunday">Sunday</label>
-              </li>
-              <li>
+
                 <input id="monday" type="checkbox"  name="Monday">
                 <label for="monday">Monday</label>                
-              </li>
-              <li>
+
                 <input id="tuesday" type="checkbox"  name="Tuesday">
                 <label for="tuesday">Tuesday</label>                                
-              </li>
-              <li>
+
                 <input id="wednesday" type="checkbox"  name="Wednesday">
                 <label for="wednesday">Wednesday</label>                                
-              </li>
-              <li>
                 <input id="thursday" type="checkbox"  name="Thursday">
                 <label for="thursday">Thursday</label>                                                
-              </li>
-              <li>
                 <input id="friday" type="checkbox"  name="Friday">
                 <label for="friday">Friday</label>                                                
-              </li>
-              <li>
                 <input id="saturday" type="checkbox"  name="Saturday">
-                <label for="saturday">Saturday</label>                                                
-              </li>
-            </ul>
-
-            <h4>Open Hours</h4>
+                <label for="saturday">Saturday</label>                          
+          </div>          
+            <h2>Open Hours</h2>
               <table class="open-hours"> 
                 <tr>
                   <td><label for="dayStart">Working Day Start Time </label></td>
@@ -64,7 +57,7 @@
               </table>
 
 
-            <h4>Appointment Details</h4>
+            <h2>Appointment Details</h2>
             <table class="appointment-details">
               <tr>
                 <td><label for="appLength">Appointment Length</label></td>
@@ -92,9 +85,9 @@
                 <td>
                   <select id="advanceNoticeFormat">
                     <option value="m">Minutes</option>                    
-                    <option value="h" selected="selected">Hour</option>
-                    <option value="d">Day</option>
-                    <option value="w">Week</option>                    
+                    <option value="h" selected="selected">Hours</option>
+                    <option value="d">Days</option>
+                    <option value="w">Weeks</option>                    
                   </select>
                 </td>
               </tr>
@@ -197,9 +190,6 @@
               })          
             });
             </script>
-      </div>
-      <div className="taken-times">
-        <h3>Booked Appointments</h3>
       </div>      
     </div>
     <div class="calendar-container">

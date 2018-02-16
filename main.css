@@ -2,18 +2,28 @@ html {
   margin: 0px;
   height: 100%;
   width: 100%;
+  font-family: 'Lato', sans-serif;  
 }
 
 body {
   margin: 0px;
   min-height: 100%;
   width: 100%;
+  font-family: 'Lato', sans-serif;
+  background: #e8e9ea;
+}
+
+h1 {
+  padding: 1em;
+  text-align: center;
+  font-weight: 700;
+  font-size: 2em
 }
 
 .page-style {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   min-height: 100vh;
 }
 
@@ -21,52 +31,58 @@ body {
   display: flex;
   flex-direction: column;
   width: 28%;
-  margin: auto;
   height: 100%;
-  border-radius: 5px;
-  padding: 15px;
-  background: #FFD8AA;
-  color: #1D4648;
-  border: 1px solid #552E00;
-}
-
-.fc-view-container {
-  border: 1px solid #552E00;  
-  border-radius: 5px;  
 }
 
 .calendar-container {
- width: 60%; 
- margin: auto;
+  width: 60%;
+}
+
+.constraints, .taken-times{
+  margin-bottom: 5vh;
+  padding: 15px;
+  background: #FFD8AA;
+  color: #1D4648;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px grey;
+}
+
+.fc-view-container {
+  border-radius: 5px;  
+  box-shadow: 1px 1px 1px grey;  
+}
+
+form{
+  display: flex;
+  flex-direction: column;
 }
 
 button {
   margin-top: 1em;
+  align-self: center;
+  width: 50%;
+  text-align: center;
   border-radius: 3px;
   padding: 8px;
-  background: #804E15;
   color: #D4A36A; 
   font-weight: 600;
-}
-
-button:hover {
   background: #1D4648;
 }
 
-div h4, h3 {
+button:hover {
+  background: #804E15;
+}
+
+div h2 {
   padding: 1.5em 0em .5em 0em;
   margin: 0;
   color: #1D4648;
-}
-
-#calendar {
-  padding-top: 1.5em;
+  font-weight: 600;
 }
 
 #calendar h2 {
   padding-left: 1em;
   color: #1D4648;
-  font-weight: 600;
 }
 
 .open-hours tr td:nth-child(2) {
@@ -96,7 +112,28 @@ select {
   border: none;
   text-align: center;
   border-radius: 2px;
-  min-height: 100%;
+  height: 26px;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+input[type=checkbox] + label { 
+ cursor: pointer;
+ width: 95px;
+ background: #D4A36A;
+ border-radius: 3px;
+ padding: 5px;
+ margin: 10px 0px 10px 0px;
+ line-height: 2em;
+}
+
+input[type=checkbox]:checked + label {
+  background: #552E00;
+  color: #FFD8AA;
 }
 
 .color-primary-0 { color: #AA7539 }	/* Main Primary color */
