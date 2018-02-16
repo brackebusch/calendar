@@ -11,7 +11,7 @@ $(document).ready(function () {
       alert('You need your strength, don\'t skip lunch =)')
       return false
     }
-})
+  })
 })
 
 let form = document.querySelector('form')
@@ -24,8 +24,6 @@ form.addEventListener('submit', event => {
   let bufferLength = null
   let dayStart = form.elements.dayStart.value
   let dayEnd = form.elements.dayEnd.value
-
-
 
   if (form.elements.appLengthFormat.value === 'hours') {
     appLength = form.elements.appLength.value * 60
@@ -55,7 +53,7 @@ form.addEventListener('submit', event => {
   const lunchEndMin = Math.floor(form.elements.lunchEnd.valueAsNumber / 60000)
 
   const openHours = (m) => {
-    m = m.minutes() + m.hours() * 60;
+    m = m.minutes() + m.hours() * 60
     return (startMin < m && m < lunchStartMin) || (lunchEndMin < m && m < endMin)
   }
 
@@ -126,11 +124,11 @@ const renderEventValues = () => {
 
       // first remove any elements from the list, then repopulate it
 
-      var listItem = document.createElement("li")
+      var listItem = document.createElement('li')
       listItem.id = eventArr[index].id
-      var node = document.createTextNode(eventArr[index].start.format("dddd, MMMM Do YYYY, h:mm a"))
+      var node = document.createTextNode(eventArr[index].start.format('dddd, MMMM Do YYYY, h:mm a'))
       listItem.appendChild(node)
-      var element = document.getElementById("appointment-list")
+      var element = document.getElementById('appointment-list')
       element.appendChild(listItem)
     } else {
       eventArr[index].title = 'Available'
