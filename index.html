@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel='stylesheet' href='css-reset.css' />  
   <link rel='stylesheet' href='fullcalendar.css' />
   <link rel='stylesheet' href='main.css' />  
   <script src='lib/jquery.min.js'></script>
@@ -51,7 +52,7 @@
             </ul>
 
             <h4>Open Hours</h4>
-              <table>
+              <table class="open-hours"> 
                 <tr>
                   <td><label for="dayStart">Working Day Start Time </label></td>
                   <td><input id="dayStart" type="time" value="08:00" required></td>
@@ -64,36 +65,36 @@
 
 
             <h4>Appointment Details</h4>
-            <table>
+            <table class="appointment-details">
               <tr>
                 <td><label for="appLength">Appointment Length</label></td>
                 <td><input id="appLength" type="number" value="50"></td>
                 <td>
-                <select id="appLengthFormat">
-                  <option value="minutes" selected="selected" step="1" pattern="\d+" required>Min</option>
-                  <option value="hours">Hr</option>
-                </select>
-              </td>
+                  <select id="appLengthFormat">
+                    <option value="minutes" selected="selected" step="1" pattern="\d+" required>Minutes</option>
+                    <option value="hours">Hours</option>
+                  </select>
+                </td>
               </tr>
               <tr>
-                  <td><label for="buggerLength">Time Buffer Between Appointments</label></td>
+                  <td><label for="buggerLength">Time Between Appointments</label></td>
                   <td><input id="bufferLength" type="number" value="10" step="1" pattern="\d+" required></td>
                   <td>
                     <select id="bufferLengthFormat">
-                      <option value="minutes" selected="selected">Min</option>
-                      <option value="hours">Hr</option>
+                      <option value="minutes" selected="selected">Minutes</option>
+                      <option value="hours">Hours</option>
                     </select>
                   </td>
               </tr>
               <tr>
-                <td>Earliest Available Appointment From Now</td>
+                <td>Earliest Available Appointment</td>
                 <td><input id="advanceNotice" type="number" value="12" step="1" pattern="\d+"></td>
                 <td>
                   <select id="advanceNoticeFormat">
-                    <option value="m">minutes</option>                    
-                    <option value="h" selected="selected">hour</option>
-                    <option value="d">day</option>
-                    <option value="w">week</option>                    
+                    <option value="m">Minutes</option>                    
+                    <option value="h" selected="selected">Hour</option>
+                    <option value="d">Day</option>
+                    <option value="w">Week</option>                    
                   </select>
                 </td>
               </tr>
@@ -186,6 +187,8 @@
                 defaultTimedEventDuration: duration,
                 forceEventDuration: true,
                 events: eventArr,
+                eventColor: '#FFD8AA',
+                eventTextColor: '#804E15',
                 // eventLimit: true,
                 eventClick: function(calEvent, jsEvent, view) {
                   $(this).css('backgroundColor', 'gray');

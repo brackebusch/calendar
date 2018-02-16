@@ -1,31 +1,125 @@
+html {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
+}
+
 .page-style {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .user-options {
   display: flex;
   flex-direction: column;
+  width: 28%;
+  margin: auto;
+  height: 100%;
+  border-radius: 5px;
+  padding: 15px;
+  background: #FFD8AA;
+  color: #1D4648;
+  border: 1px solid #552E00;
+}
+
+.fc-view-container {
+  border: 1px solid #552E00;  
+  border-radius: 5px;  
 }
 
 .calendar-container {
- width: 50%; 
+ width: 60%; 
+ margin: auto;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+button {
+  margin-top: 1em;
+  border-radius: 3px;
+  padding: 8px;
+  background: #804E15;
+  color: #D4A36A; 
+  font-weight: 600;
 }
 
-h4 {
-  text-decoration: underline;
-  padding-top: 1em;
-  margin: 0;
+button:hover {
+  background: #1D4648;
 }
 
-table {
-  padding: 0;
+div h4, h3 {
+  padding: 1.5em 0em .5em 0em;
   margin: 0;
+  color: #1D4648;
+}
+
+#calendar {
+  padding-top: 1.5em;
+}
+
+#calendar h2 {
+  padding-left: 1em;
+  color: #1D4648;
+  font-weight: 600;
+}
+
+.open-hours tr td:nth-child(2) {
+  max-width: 120px;
+  background: #D4A36A;
+  color: #202020;
+}
+
+td > input {
+  width: 100%;
+}
+
+td {
+  border-radius: 2px;
+}
+
+.appointment-details tr td:nth-child(2)  {
+  max-width: 40px;
+  background: #D4A36A;  
+  color: #132829;  
+  text-align: center
+}
+
+select {
+  background: #D4A36A;  
+  color: #132829;  
+  border: none;
+  text-align: center;
+  border-radius: 2px;
+  min-height: 100%;
+}
+
+.color-primary-0 { color: #AA7539 }	/* Main Primary color */
+.color-primary-1 { color: #FFD8AA }
+.color-primary-2 { color: #D4A36A }
+.color-primary-3 { color: #804E15 }
+.color-primary-4 { color: #552E00 }
+
+input:focus, input[type]:focus {   
+  box-shadow: 0 1px 1px #1D4648 inset, 0 0 8px #132829;
+  outline: 0 none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=time]::-webkit-inner-spin-button, 
+input[type=time]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
 }
