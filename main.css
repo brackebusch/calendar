@@ -1,10 +1,3 @@
-html {
-  margin: 0px;
-  height: 100%;
-  width: 100%;
-  font-family: 'Lato', sans-serif;  
-}
-
 body {
   margin: 0px;
   min-height: 100%;
@@ -12,8 +5,8 @@ body {
   font-family: 'Lato', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  background: #ecf0f1;
-  color: #2c3e50;  
+  background: #f1f2f6;
+  color: #000;  
 }
 
 h1 {
@@ -22,6 +15,24 @@ h1 {
   font-weight: 700;
   font-size: 2em
 }
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  padding: .5em 0em .5em 0em;
+  text-decoration: underline;
+  margin: 0;
+  font-weight: 800;
+}
+
+h2:nth-child(1) {
+  text-align: center;
+  font-size: 1.5em;
+}
+
 
 .page-style {
   display: flex;
@@ -44,7 +55,7 @@ h1 {
 .constraints, .taken-times, .booked-appointments {
   margin-bottom: 5vh;
   padding: 15px;
-  background: #f1c40f;
+  background: #ced6e0;
   border-radius: 5px;
   box-shadow: 1px 1px 1px grey;
 }
@@ -52,18 +63,6 @@ h1 {
 .fc-view-container {
   border-radius: 5px;  
   box-shadow: 1px 1px 1px grey;  
-}
-
-form{
-  display: flex;
-  flex-direction: column;
-}
-
-h2 {
-  padding: .5em 0em .5em 0em;
-  text-decoration: underline;
-  margin: 0;
-  font-weight: 800;
 }
 
 .fc-right {
@@ -80,7 +79,7 @@ h2 {
 
 .open-hours tr td:nth-child(2) {
   max-width: 120px;
-  background: #f39c12;
+  background: #dfe4ea;
 }
 
 td > input {
@@ -93,7 +92,7 @@ td {
 
 .appointment-details tr td:nth-child(2)  {
   max-width: 40px;
-  background: #f39c12;  
+  background: #dfe4ea;  
   text-align: center
 }
 
@@ -102,7 +101,7 @@ td {
 }
 
 select {
-  background: #f39c12;  
+  background: #dfe4ea;  
   border: none;
   text-align: center;
   border-radius: 2px;
@@ -133,7 +132,7 @@ button:hover {
 input[type=checkbox] + label { 
  cursor: pointer;
  width: 95px;
- background: #f1c40f;
+ background: #ced6e0;
  border: 1px solid #7f8c8d;
  border-radius: 3px;
  padding: 5px;
