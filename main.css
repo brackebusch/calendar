@@ -2,8 +2,7 @@ body {
   margin: 0px;
   min-height: 100%;
   width: 100%;
-  font-family: 'Lato', sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   background: #f1f2f6;
   color: #000;  
@@ -31,6 +30,7 @@ h2 {
 h2:nth-child(1) {
   text-align: center;
   font-size: 1.5em;
+  text-decoration: none;
 }
 
 
@@ -78,8 +78,11 @@ h2:nth-child(1) {
 }
 
 .open-hours tr td:nth-child(2) {
-  max-width: 120px;
   background: #dfe4ea;
+}
+
+tr {
+  padding: 7px;
 }
 
 td > input {
@@ -98,6 +101,7 @@ td {
 
 .open-hours, .availability, .appointment-details {
   padding-bottom: 2em;
+  width: 80%;
 }
 
 select {
@@ -122,27 +126,31 @@ button {
   border-radius: 3px;
   padding: 8px;
   font-weight: 600;
-  background: #2ecc71;
+  background: #ffd32a;
 }
 
 button:hover {
-  background: #27ae60;
+  background: #ffdd59;
 }
+
 
 input[type=checkbox] + label { 
  cursor: pointer;
- width: 95px;
  background: #ced6e0;
  border: 1px solid #7f8c8d;
  border-radius: 3px;
  padding: 5px;
- margin: 10px 0px 10px 0px;
- line-height: 2em;
+ margin: 7px;
+ line-height: 2.5em;
 }
 
 input[type=checkbox]:checked + label {
-  background: #2ecc71;
-  border: 1px solid #2ecc71;
+  background: #ffd32a;
+  border: 1px solid #ffd32a;
+}
+
+input[type=checkbox]+ label:hover {
+  background: #ffdd59;
 }
 
 input:focus, input[type]:focus {   

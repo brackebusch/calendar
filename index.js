@@ -1,6 +1,6 @@
 $(document).ready(function () {
   $('#checkBtn').click(function () {
-    checked = $("input[type=checkbox]:checked").length
+    let checked = $('input[type=checkbox]:checked').length
     if (!checked) {
       alert('You must check at least one day to Work.')
       return false
@@ -54,7 +54,7 @@ form.addEventListener('submit', event => {
 
   const openHours = (m) => {
     m = m.minutes() + m.hours() * 60
-    return (startMin < m && m < lunchStartMin) || (lunchEndMin < m && m < endMin)
+    return (startMin <= m && m < lunchStartMin) || (lunchEndMin <= m && m < endMin)
   }
 
   const validAppointment = (m) => {
@@ -76,9 +76,9 @@ form.addEventListener('submit', event => {
         title: ('Available'),
         start: createMoment,
         selected: false,
-        backgroundColor: '#f1c40f',
+        backgroundColor: '#7bed9f',
         textColor: '#000',
-        borderColor: '#f39c12'
+        borderColor: '#2ed573'
       })
       i++
     }
@@ -92,6 +92,7 @@ form.addEventListener('submit', event => {
       end: dayEnd,
       dow: workingDays
     },
+    timeFormat: 'h:mma',
     defaultTimedEventDuration: duration,
     forceEventDuration: true,
     events: eventArr,
@@ -132,9 +133,9 @@ const renderEventValues = () => {
       element.appendChild(listItem)
     } else {
       eventArr[index].title = 'Available'
-      eventArr[index].backgroundColor = '#f1c40f'
+      eventArr[index].backgroundColor = '#7bed9f'
       eventArr[index].textColor = '#000'
-      eventArr[index].borderColor = '#f39c12'
+      eventArr[index].borderColor = '#2ed573'
       
       if (document.contains(document.getElementById(eventArr[index].id.toString()))) {
         document.getElementById(eventArr[index].id.toString()).remove()
