@@ -7,13 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel='stylesheet' href='css-reset.css' />
+  <link rel="stylesheet" type="text/css" media="all" href="jquery-ui.css">
+  <link rel='stylesheet' href='jquery-confirm.min.css' />
   <link rel='stylesheet' href='fullcalendar.css' />
   <script src='lib/jquery.min.js'></script>
   <script src='lib/moment.min.js'></script>
   <script src='fullcalendar.js'></script>
   <script src="jquery-ui.js"></script>  
   <link rel='stylesheet' href='main.css' />
-  <link rel="stylesheet" type="text/css" media="all" href="jquery-ui.css">
+  <script src="jquery-confirm.min.js"></script>  
+
 
   <title>Interactive Calendar</title>
 </head>
@@ -149,8 +152,7 @@
             </tr>
           </table>
           <br>
-          <h2>Generate Availability Upto</h2>
-              <!-- <td>Date</td> -->
+          <h2>Generate Availability Till</h2>
           <input type="text" id="datepicker" class="end-date" placeholder="DD/MM/YYYY" required>
           <br>
           <button id="checkBtn">Populate Calendar</button>

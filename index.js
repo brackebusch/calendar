@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 $(document).ready(function () {
   $('#checkBtn').click(function () {
     let checked = $('input[type=checkbox]:checked').length
@@ -17,6 +19,7 @@ $(document).ready(function () {
 $( function() {
   $( "#datepicker" ).datepicker();
 } );
+
 
 let form = document.querySelector('form')
 const eventArr = []
@@ -90,6 +93,61 @@ form.addEventListener('submit', event => {
     }
   }
 
+  
+let confirmContent = (calEvent) => {
+  if (calEvent.selected) {
+    return {
+      animateFromElement: false,
+      boxWidth: '30%',
+      useBootstrap: false,
+      animation: 'top',
+      closeAnimation: 'bottom',
+      title: "Cancel Appointment",
+      content: ('Would you like to cancel your appointment on ' + eventArr[calEvent.id].start.format("dddd, MMMM Do, h:mm a") + "?"),
+      buttons: {
+        unschedule: {
+          btnClass: "btn-red",
+          text: "Yes Cancel",
+          action: function() {
+            eventArr[calEvent.id].selected = !eventArr[calEvent.id].selected
+            renderEventValues()    
+          }
+            // $.alert('Appointment Canceled');
+        },
+        undoCancel: {
+          text: "go back"
+        },
+      }
+    } 
+   } else {
+      return {
+      animateFromElement: false,        
+      boxWidth: '30%',
+      useBootstrap: false,
+      animation: 'top',
+      closeAnimation: 'bottom',      
+      title: "Schedule Appointment",
+      content: ('Would you like to book an appointment on ' + 
+              eventArr[calEvent.id].start.format("dddd, MMMM Do, h:mm a") + 
+              "? (Appointments are " + appLength + " " + form.elements.appLengthFormat.value + ")"),
+      buttons: {
+          bookAppointment: {
+            btnClass: "btn-green",
+            text: "Schedule",
+            action: function() {
+              eventArr[calEvent.id].selected = !eventArr[calEvent.id].selected
+              renderEventValues()
+                // $.alert('Appointment Scheduled');
+            }
+          },
+          undo: {
+            text: "cancel"
+          },
+        }
+      }
+    } 
+} 
+
   $('#calendar').fullCalendar('removeEvents')
   $('#calendar').fullCalendar('renderEvents', eventArr, true)
   $('#calendar').fullCalendar({
@@ -103,17 +161,7 @@ form.addEventListener('submit', event => {
     forceEventDuration: true,
     events: eventArr,
     eventClick: function (calEvent, jsEvent, view) {
-      if (calEvent.selected) {
-        if (confirm('Would you like to cancel your appointment on ' + 
-        eventArr[calEvent.id].start.format("dddd, MMMM Do, h:mm a") + "?")) {
-          eventArr[calEvent.id].selected = !eventArr[calEvent.id].selected
-          renderEventValues()
-        }
-      } else if (confirm('Would you like to book an appointment on ' + 
-      eventArr[calEvent.id].start.format("dddd, MMMM Do, h:mm a") + "? (Appointments are " + appLength + " " + form.elements.appLengthFormat.value + ")")) {
-        eventArr[calEvent.id].selected = !eventArr[calEvent.id].selected
-        renderEventValues()
-      }
+      $.confirm(confirmContent(calEvent));
     }
   })
 })

@@ -125,6 +125,7 @@ select {
   border-radius: 2px;
   font-size: 1.2rem;
   padding: .1rem;
+  margin-left: .2rem;
 }
 
 input[type=checkbox] {
@@ -199,4 +200,14 @@ input[type=number]::-webkit-outer-spin-button {
   width: 40%;
   background: #dfe4ea;
   text-align: center;
+}
+
+.jconfirm-title {
+  text-align: center;
+  font-weight: 600;
+}
+
+.jconfirm-buttons {
+  display: flex;
+  font-weight: 600;
 }
