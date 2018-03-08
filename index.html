@@ -8,10 +8,12 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel='stylesheet' href='css-reset.css' />
   <link rel='stylesheet' href='fullcalendar.css' />
-  <link rel='stylesheet' href='main.css' />
   <script src='lib/jquery.min.js'></script>
   <script src='lib/moment.min.js'></script>
   <script src='fullcalendar.js'></script>
+  <script src="jquery-ui.js"></script>  
+  <link rel='stylesheet' href='main.css' />
+  <link rel="stylesheet" type="text/css" media="all" href="jquery-ui.css">
 
   <title>Interactive Calendar</title>
 </head>
@@ -23,12 +25,11 @@
       <div class="taken-times">
         <h2>About</h2>
         <br>
-        <p>This application is designed for owners of a small business to set their availability for clients to book themselves
-          appointments.
-          <br>
-          <br> The menu on the left is for a business owner (counselor, home inspector, masseuse, etc.) to set their availability.
-          <br>
-          <br> The generated calendar is for users to interact with and book appointments.
+        <p>This application is designed for owners of small businesses to set their availability so that clients can book appointments.
+        <br>
+        <br> The menu below is for a business owner (counselor, home inspector, masseuse, etc.) to customize their schedule and create available time slots.
+        <br>
+        <br> The calendar generated is used by clients to book appointments.
         </p>
       </div>
 
@@ -60,7 +61,7 @@
             <input id="saturday" type="checkbox" name="Saturday" >
             <label for="saturday">Saturday</label>
           </div>
-
+          <br>
           <table class="open-hours">
             <h2>Open Hours</h2>
             <tr>
@@ -80,7 +81,7 @@
               </td>
             </tr>
           </table>
-
+          <br>
           <table class="open-hours">
               <h2>Lunch Break</h2>
               <tr>
@@ -101,7 +102,7 @@
               </tr>
             </table>
 
-
+            <br>
           <table class="appointment-details">
             <h2>Appointment Details</h2>
             <tr>
@@ -147,8 +148,11 @@
               </td>
             </tr>
           </table>
-          <!-- <h2>Generate Appoinments Till Date</h2>
-            <p>Date: <input type="text" id="datepicker"></p> -->
+          <br>
+          <h2>Generate Availability Upto</h2>
+              <!-- <td>Date</td> -->
+          <input type="text" id="datepicker" class="end-date" placeholder="DD/MM/YYYY" required>
+          <br>
           <button id="checkBtn">Populate Calendar</button>
         </form>
       </div>

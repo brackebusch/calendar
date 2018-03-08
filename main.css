@@ -45,19 +45,13 @@ h2:nth-child(1) {
   display: flex;
   flex-direction: column;
   width: 28%;
+  min-width: 530px;
+  max-width: 600px;
   height: 100%;
 }
 
 .calendar-container {
   width: 60%;
-}
-
-.constraints, .taken-times, .booked-appointments {
-  margin-bottom: 5vh;
-  padding: 15px;
-  background: #ced6e0;
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px grey;
 }
 
 .fc-view-container {
@@ -77,39 +71,60 @@ h2:nth-child(1) {
   font-weight: 700;
 }
 
+.open-hours tr td:nth-child(1) {
+  width: 60%;
+}
+
 .open-hours tr td:nth-child(2) {
   background: #dfe4ea;
-}
-
-tr {
-  padding: 7px;
-}
-
-td > input {
-  width: 100%;
+  text-align: center;
 }
 
 td {
-  border-radius: 2px;
+  border-radius: 4px;
+}
+
+.appointment-details tr td:nth-child(1)  {
+  width: 60%;
+  text-align: left;
 }
 
 .appointment-details tr td:nth-child(2)  {
-  max-width: 40px;
+  width: 10%;
   background: #dfe4ea;  
-  text-align: center
+  text-align: left;
 }
 
-.open-hours, .availability, .appointment-details {
-  padding-bottom: 2em;
-  width: 80%;
+option {
+  width: 100%;
+  font-size: 1.2rem;
+  height: 100%;
+  text-align: center;
+}
+
+.appointment-details input {
+  width: 100%;
+  text-align: center;
+}
+
+.constraints, .taken-times, .booked-appointments {
+  margin-bottom: 5vh;
+  padding: 15px;
+  background: #ced6e0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px grey;
 }
 
 select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   background: #dfe4ea;  
   border: none;
   text-align: center;
   border-radius: 2px;
-  height: 26px;
+  font-size: 1.2rem;
+  padding: .1rem;
 }
 
 input[type=checkbox] {
@@ -158,11 +173,6 @@ input:focus, input[type]:focus {
   outline: 0 none;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-}
-
 input[type=number] {
   -moz-appearance: textfield;
 }
@@ -170,8 +180,23 @@ input[type=number] {
 input[type=time]::-webkit-inner-spin-button, 
 input[type=time]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
+  margin: 0; 
+  padding: 0px 5px; 
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+  padding: 0px 5px; 
 }
 
 .fc-today {
   background: #bdc3c7 !important;
+}
+
+.end-date {
+  width: 40%;
+  background: #dfe4ea;
+  text-align: center;
 }

@@ -14,6 +14,10 @@ $(document).ready(function () {
   })
 })
 
+$( function() {
+  $( "#datepicker" ).datepicker();
+} );
+
 let form = document.querySelector('form')
 const eventArr = []
 
@@ -66,8 +70,10 @@ form.addEventListener('submit', event => {
   let i = 0
 
   let createMoment = moment().add(startInt, startType).startOf('hour')
+  let endDate = moment(form.elements[17].value)
+  console.log(endDate)
 
-  while (i < 40) {
+  while (createMoment < endDate) {
     createMoment = moment(createMoment).add(timeToBookInteger, 'm')
 
     if (validAppointment(createMoment)) {
