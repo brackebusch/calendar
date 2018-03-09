@@ -95,6 +95,7 @@ td {
   text-align: left;
 }
 
+
 option {
   width: 100%;
   font-size: 1.2rem;
@@ -149,6 +150,13 @@ button:hover {
   background: #ffdd59;
 }
 
+input:hover {
+  cursor: pointer;  
+}
+
+select:hover {
+  cursor: pointer;    
+}
 
 input[type=checkbox] + label { 
  cursor: pointer;
@@ -166,7 +174,8 @@ input[type=checkbox]:checked + label {
 }
 
 input[type=checkbox]+ label:hover {
-  background: #ffdd59;
+  /* background: #ffdd59; */
+  background: radial-gradient(#FFEDA8, #ffdd59);
 }
 
 input:focus, input[type]:focus {   

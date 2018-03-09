@@ -160,6 +160,14 @@ let confirmContent = (calEvent) => {
     defaultTimedEventDuration: duration,
     forceEventDuration: true,
     events: eventArr,
+    eventMouseover: function( event, jsEvent, view ) {
+      $(this).css('border-color', '#ffd32a');
+      $(this).css('cursor', 'pointer');
+     },
+    eventMouseout: function( event, jsEvent, view ) {
+      $(this).css('border-color', '#2ed573');
+      $(this).css('cursor', 'default');      
+     },
     eventClick: function (calEvent, jsEvent, view) {
       $.confirm(confirmContent(calEvent));
     }
