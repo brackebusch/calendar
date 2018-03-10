@@ -1,4 +1,6 @@
-livesite: https://brackebusch.github.io/calendar/
+Demo: https://brackebusch.github.io/calendar/
+Live: http://www.superiorsystems.com/calendar?key=karin
+
 
 # Calendar – Helping Small Businesses Schedule Clients
 
