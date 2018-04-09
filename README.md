@@ -1,3 +1,7 @@
+Demo: https://brackebusch.github.io/calendar/
+Live: http://www.superiorsystems.com/calendar?key=karin
+
+
 # Calendar – Helping Small Businesses Schedule Clients
 
 This application is designed as a plugin for those who seek to set hours of availability for people to schedule appointments. The target audience is small business owners who wish to add appointment scheduling functionality to their website. Appointment openings will be set by the business, and then further updated as clients book and/or chancel appointments.
