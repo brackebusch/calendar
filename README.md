@@ -1,5 +1,7 @@
 Demo: https://brackebusch.github.io/calendar/
 
+![screenshot](https://user-images.githubusercontent.com/6962425/38648223-e2a79906-3da4-11e8-8ec9-1d64051bfc07.png)
+
 # Calendar – Helping Small Businesses Schedule Clients
 
 This application is designed as a plugin for those who seek to set hours of availability for people to schedule appointments. The target audience is small business owners who wish to add appointment scheduling functionality to their website. Appointment openings will be set by the business, and then further updated as clients book and/or chancel appointments.
