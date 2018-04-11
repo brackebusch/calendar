@@ -1,6 +1,4 @@
 Demo: https://brackebusch.github.io/calendar/
-Live: http://www.superiorsystems.com/calendar?key=karin
-
 
 # Calendar – Helping Small Businesses Schedule Clients
 
@@ -12,3 +10,4 @@ There are two fundamental components to this application:
 ## Technical Details
 The core of this application is generating an array of “events” (appointments) which will render to the calendar. After constraints have been established, the various input fields are evaluated to populate the calendar with open appointments. 
 This application is written in JavaScript, jQuery, HTML, and CSS, and as this is only a demo of functionality no backend/database is used. Total time to completion was about four days, with the bulk of the time working though the “how” of integrating Full Calendar API.
+

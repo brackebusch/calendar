@@ -159,7 +159,18 @@ let confirmContent = (calEvent) => {
     timeFormat: 'h:mma',
     defaultTimedEventDuration: duration,
     forceEventDuration: true,
+    // defaultView: 'week',
+    header: {
+      left: 'prev,next,today',
+      center: 'title',
+      right: 'agendaWeek,month'
+    },
+    defaultView: 'agendaWeek',
+    allDaySlot: false,
+    minTime: dayStart,
+    maxTime: dayEnd,
     events: eventArr,
+    height: "auto",
     eventMouseover: function( event, jsEvent, view ) {
       $(this).css('border-color', '#ffd32a');
       $(this).css('cursor', 'pointer');

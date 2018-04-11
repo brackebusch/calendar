@@ -59,8 +59,12 @@ h2:nth-child(1) {
   box-shadow: 1px 1px 1px grey;  
 }
 
-.fc-right {
-  width: 15em;
+/* .fc-right {
+  width: 30%;
+} */
+
+.fc-button-group {
+  display: flex;
 }
 
 #calendar h2 {
